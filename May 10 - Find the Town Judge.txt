@@ -1,0 +1,39 @@
+Question - https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3325/
+
+Logic - The basic idea is to find someone who trusts noone, and then check if n-1 people trust them. 
+
+Code -
+import java.util.*;
+import java.lang.*;
+class Solution {
+    public int findJudge(int N, int[][] trust) {
+        Set<Integer> possibleSet = new HashSet<>();
+        int size = trust.length;
+        if(size == 0){
+            return 1;
+        }
+        for(int i =0;i<size ;i ++){
+            possibleSet.add(trust[i][1]);
+        }
+        System.out.println(possibleSet);
+        for(int i=0;i<size;i++){
+            if(possibleSet.contains(trust[i][0])){
+                possibleSet.remove(trust[i][0]);
+            }
+        }
+        for(int a : possibleSet){
+            int count = 0;
+            System.out.println(a);
+            for(int i=0;i<size;i++){
+                if(trust[i][1] == a){
+                    count++;
+                }
+            }
+            if(count == N-1){
+                return a;
+            }
+        } 
+        return -1;
+        
+    }
+}

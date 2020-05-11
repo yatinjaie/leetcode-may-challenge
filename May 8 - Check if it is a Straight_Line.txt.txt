@@ -1,0 +1,28 @@
+Question - https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3323/
+
+Logic - The condition for multiple points to be collinear is that every pair has the same slope. So here, we take the slope and then we check every other pair and compare it with the previous slope. If at any point, the slope is different, return False. Points (a,b) -> initialSlope. Then keep on checking for (1,2), (2,3), etc.
+
+Code -
+
+
+
+import java.util.*;
+class Solution {
+    public boolean checkStraightLine(int[][] coordinates) {
+        int n = coordinates.length;
+        if(n <=2 ){
+            return true;
+        }
+        double m = 0d,res=0d;
+        for(int i=1; i< n -1 ; i++){
+            res = m;
+            int x = coordinates[i+1][1] - coordinates[i][1];
+            int y = coordinates[i+1][0] - coordinates[i][0];
+            m = (double)x / y;
+            if(res !=m && i!=1){
+               return false;
+            }
+        }
+        return true;
+    }
+}
