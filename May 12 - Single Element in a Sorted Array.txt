@@ -1,0 +1,60 @@
+Question - https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3326/
+
+Logic - The basic idea is to find someone who trusts noone, and then check if n-1 people trust them. 
+
+Code - Use the graph algorithm to recusively traverse through all the neighbours and assign MAX_VALUE where color is to be changed and then iterate through matrix and replace MAX_VALUE with new color value.
+
+Complexity - O(n) Auxiliary Space - O(1)
+
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        int count = 0;
+        int n = nums.length;
+        for(int i = 0 ; i< n-1 ; i = i+2){
+            if(nums[i] != nums[i+1]){
+                return nums[i];
+            }
+        }
+        if(n %2 !=0){
+            return nums[n-1];
+        }
+        return -1;
+}
+
+Complexity - O(log n) Auxiliary Space - O(1)
+
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        return search(nums,0,nums.length-1);
+    }
+    
+    public int search(int[] arr, int low, int high) 
+    { 
+        if(low > high) 
+            return -1; 
+        if(low == high){
+            return arr[high];        
+        } 
+          
+        int mid = (low + high)/2; 
+        
+        // If mid is even   
+        if(mid % 2 == 0){     
+            if(arr[mid] == arr[mid+1]) 
+                return search(arr, mid+2, high); 
+            else
+                return search(arr, low, mid); 
+        } 
+        
+        // If mid is odd 
+        else if(mid % 2 == 1){
+            if(arr[mid] == arr[mid-1]) 
+                return search(arr, mid+1, high); 
+            else
+                return search(arr, low, mid-1); 
+        } 
+        return -1;
+    } 
+}
+			
+		
