@@ -1,0 +1,17 @@
+Question - https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3317/
+
+Logic - Traverse the stones S and check if stone is jewel.
+
+Code - 
+
+class Solution {
+    public int numJewelsInStones(String J, String S) {
+        int count = 0;
+        for(char c : S.toCharArray()){
+            if(J.indexOf(c) != -1){
+                count++;
+            }
+        }
+        return count;
+    }
+}

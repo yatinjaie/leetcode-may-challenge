@@ -1,0 +1,35 @@
+Question - https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3329/
+
+Logic - Basic idea is to use a HashSet as it insert and search in constant time. Also, startsWith method takes O(n) time.
+
+Code - 
+
+class Trie {
+    
+    Set<String> set;
+
+    /** Initialize your data structure here. */
+    public Trie() {
+        set = new HashSet();
+    }
+    
+    /** Inserts a word into the trie. */
+    public void insert(String word) {
+        set.add(word);
+    }
+    
+    /** Returns if the word is in the trie. */
+    public boolean search(String word) {
+        return set.contains(word);
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    public boolean startsWith(String prefix) {
+        Iterator<String> i = set.iterator(); 
+        while (i.hasNext()){
+            if(i.next().startsWith(prefix))
+                return true;
+        } 
+        return false;
+    }
+}
