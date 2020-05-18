@@ -1,0 +1,44 @@
+Question - https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3332/
+
+Logic - Basic idea is to use a Hash Table(Array of 26 characters) and match occurances of characters in both strings while traversing the string using sliding window method.
+
+Code - 
+
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> output = new ArrayList<>();
+        int m = s.length();
+        int n = p.length();
+        int[] countArr = new int[26];
+        if(n>m){
+            return new ArrayList<>();
+        }
+        for(int i =0;i<n;i++){
+            countArr[s.charAt(i) - 'a']++;
+            countArr[p.charAt(i) - 'a']--;
+        }
+        
+        for(int i =n ;i <m ;i++){
+            if(areAllZeros(countArr)){
+                output.add(i-n);
+            }
+            countArr[s.charAt(i)-'a']++;
+            countArr[s.charAt(i-n)-'a']--;
+        }
+        
+        if(areAllZeros(countArr)){
+            output.add(m-n);
+        }
+        return output;
+    }
+    
+    boolean areAllZeros(int[] countArr){
+        for(int i=0;i<countArr.length ;i++){
+            if(countArr[i]!=0){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+}
