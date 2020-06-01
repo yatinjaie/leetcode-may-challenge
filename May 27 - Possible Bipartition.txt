@@ -1,0 +1,43 @@
+Question - https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3342/
+
+Code - 
+
+class Solution {
+    public boolean possibleBipartition(int N, int[][] dislikes) {
+        List<List<Integer>> graph = new ArrayList<>(N+1);
+        int[] group = new int[N+1];
+        for(int i = 0 ;i <=N ; i++){
+            graph.add(new ArrayList<Integer>());
+        }
+        
+        for(int i = 0 ;i<dislikes.length;i++){
+            graph.get(dislikes[i][0]).add(dislikes[i][1]);
+            graph.get(dislikes[i][1]).add(dislikes[i][0]);
+        }
+        Queue<Integer> q = new LinkedList<Integer>();
+        //Using BFS
+        for(int i = 1 ;i<=N ;i++){
+            if(group[i] ==0){
+                group[i]=1;
+                q.add(i);
+                while(!q.isEmpty()){
+                    int u = q.poll();
+                    for(int j: graph.get(u)){
+                        if(group[j]==0){
+                            if(group[u] ==1)
+                                group[j] = 2;
+                            else
+                                group[j] = 1;
+                            q.add(j);
+                        }
+                        if(group[j] == group[u]){
+                            return false;
+                        }
+                    }
+                }
+            }
+            
+        }
+        return true;
+    }
+}
