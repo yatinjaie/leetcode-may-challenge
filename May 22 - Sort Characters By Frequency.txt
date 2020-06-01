@@ -1,0 +1,29 @@
+Question - https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3337/
+
+Logic - Use a countArray to store count of each character. To maintain order, use priority queue and create a string out of it.
+
+Code - 
+
+class Solution {
+    public String frequencySort(String s) {
+        int[] countArr = new int[256];
+        
+        for(char c : s.toCharArray()){
+            countArr[c]++;
+        }
+           
+        PriorityQueue<Character> pq = new PriorityQueue<>((a, b) -> countArr[b] - countArr[a]);
+        for(int i = 0; i < 256; i++){
+            pq.add((char)i);
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        while(!pq.isEmpty()){
+            char c = pq.poll();
+            for(int i = 0 ;i < countArr[c] ; i++){
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+}

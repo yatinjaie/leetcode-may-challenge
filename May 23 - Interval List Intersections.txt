@@ -1,0 +1,38 @@
+Question - https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3338/
+
+Logic - Traverse Array A and B in the single loop and check for intersection points.
+
+Code - 
+
+class Solution {
+    public int[][] intervalIntersection(int[][] A, int[][] B) {
+        List<int[]> list = new ArrayList<>();
+        int i = 0; int j = 0;
+        while(i < A.length && j < B.length){
+            int start = Math.max(A[i][0], B[j][0]);
+            int end = Math.min(A[i][1],B[j][1]);
+            
+            if(start<=end){
+                list.add(new int[]{start,end});
+            }
+            
+            if(A[i][1] < B[j][1]){
+				i++;
+			}
+			else{
+				j++;
+			}
+            
+            
+        }
+             
+        
+        int[][] res = new int[list.size()][2];
+        int k = 0;
+        for(int[] arr : list){
+            res[k++] = arr;
+        }
+        return res;
+        
+    }
+}

@@ -1,0 +1,30 @@
+Question - https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3335/
+
+Logic - Use the inorder traversal as it gives the sorted array and get the (k-1)th node.
+
+Code - 
+
+class Solution {
+    int result = 0;
+    int count = 0;
+    public int kthSmallest(TreeNode root, int k) {
+      recur(root,k);
+      return result;
+    }
+    
+    
+    public void recur(TreeNode root, int k){
+       if(count == k){
+           return;
+       }
+        if(root ==null){
+            return;
+        }
+        recur(root.left, k);
+        if(k == ++count){
+            result = root.val;
+            return;
+        }
+        recur(root.right, k);
+    }
+}
